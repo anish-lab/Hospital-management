@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediCare Plus - Hospital Management</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="logo">
+            <h2><i class="fa-solid fa-hospital"></i> MediCare Plus</h2>
+        </div>
+        <ul class="nav-links">
+            <li class="active" onclick="switchTab('dashboard', this)"><i class="fa-solid fa-chart-line"></i> Dashboard</li>
+            <li onclick="switchTab('patients', this)"><i class="fa-solid fa-users"></i> Patients</li>
+            <li onclick="switchTab('appointments', this)"><i class="fa-regular fa-calendar-check"></i> Appointments</li>
+            <li onclick="switchTab('billing', this)"><i class="fa-solid fa-file-invoice-dollar"></i> Billing</li>
+        </ul>
+        <div class="user-role">
+            <p>Logged in as: <strong>Admin</strong></p>
+        </div>
+    </div>
+
+    <div class="main-content">
+        
+        <header class="top-nav">
+            <div class="search-bar">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" placeholder="Search patients by ID or Name...">
+            </div>
+            <div class="profile">
+                <i class="fa-solid fa-user-circle fa-2x"></i>
+            </div>
+        </header>
+
+        <section id="dashboard" class="view-section active-view">
+            <h1>Overview</h1>
+            <div class="cards">
+                <div class="card">
+                    <h3>Total Patients</h3>
+                    <p class="number">1,204</p>
+                </div>
+                <div class="card">
+                    <h3>Appointments Today</h3>
+                    <p class="number">42</p>
+                </div>
+                <div class="card">
+                    <h3>Available Doctors</h3>
+                    <p class="number">15</p>
+                </div>
+            </div>
+
+            <div class="recent-section">
+                <h2>Recent Appointments</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Patient ID</th>
+                            <th>Name</th>
+                            <th>Doctor</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>HSP1001</td>
+                            <td>Rahul Sharma</td>
+                            <td>Dr. Smith (Cardiology)</td>
+                            <td>10:30 AM</td>
+                            <td><span class="badge completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td>HSP1002</td>
+                            <td>Anita Desai</td>
+                            <td>Dr. Jones (General)</td>
+                            <td>11:00 AM</td>
+                            <td><span class="badge pending">Waiting</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="patients" class="view-section">
+            <div class="section-header">
+                <h1>Patient Management</h1>
+                <button class="btn-primary" onclick="openPatientModal()"><i class="fa-solid fa-plus"></i> Add New Patient</button>
+            </div>
+            
+            <div class="form-container" id="add-patient-form" style="display: none;">
+                <h3>Register Patient</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Auto-Generated ID</label>
+                        <input type="text" id="patient-id" readonly class="readonly-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="Enter patient name">
+                    </div>
+                    <div class="form-group">
+                        <label>Age</label>
+                        <input type="number" placeholder="Enter age">
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Number</label>
+                        <input type="text" placeholder="Enter phone">
+                    </div>
+                </div>
+                <button class="btn-success" onclick="savePatient()">Save Record</button>
+                <button class="btn-danger" onclick="closePatientModal()">Cancel</button>
+            </div>
+        </section>
+
+        <section id="appointments" class="view-section">
+            <h1>Appointments Schedule</h1>
+            <p>Calendar and scheduling module will go here.</p>
+        </section>
+
+        <section id="billing" class="view-section">
+            <h1>Billing & Invoices</h1>
+            <p>Generate PDF bills and view payment history here.</p>
+        </section>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
