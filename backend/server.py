@@ -4,16 +4,13 @@ import sqlite3
 import os
 
 app = Flask(__name__)
-# CORS allows your frontend (HTML) to communicate with this backend
 CORS(app) 
 
 DB_FILE = 'hospital.db'
 
-# --- 1. Database Setup ---
 def init_db():
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
-    # Create Patients Table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS patients (
             patient_id TEXT PRIMARY KEY,
@@ -26,9 +23,6 @@ def init_db():
     conn.close()
     print("Database initialized successfully.")
 
-# --- 2. API Routes ---
-
-# Add a new patient (POST request)
 @app.route('/api/patients', methods=['POST'])
 def add_patient():
     data = request.json
@@ -50,7 +44,6 @@ def add_patient():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
-# Get all patients (GET request)
 @app.route('/api/patients', methods=['GET'])
 def get_patients():
     conn = sqlite3.connect(DB_FILE)
@@ -59,7 +52,6 @@ def get_patients():
     rows = cursor.fetchall()
     conn.close()
     
-    # Format the data into a list of dictionaries
     patients = []
     for row in rows:
         patients.append({
@@ -71,8 +63,6 @@ def get_patients():
         
     return jsonify(patients), 200
 
-# --- 3. Start Server ---
 if __name__ == '__main__':
     init_db()
-    # Runs the server on http://localhost:5000
     app.run(debug=True, port=5000)
